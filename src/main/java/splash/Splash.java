@@ -1,10 +1,13 @@
 package splash;
 
-import java.io.IOException;
+import DAL.DAL;
+import Models.Category;
+import Models.Student;
+
 import java.util.Scanner;
 
-public class Splash {
-    //private int attempt;
+public class Splash extends DAL {
+    private final int MAX_ATTEMPTS = 1;
 
     public Splash() {
 
@@ -33,44 +36,82 @@ public class Splash {
         System.out.println("===> "+ area + "\n");
     }
 
-    public boolean login(int attempt){
-        if(attempt == 0)
-            logout("Please consult the administrator of the system...");
 
-        header("Login");
-        System.out.println("Please input your data! "+attempt+" attempts!");
-        System.out.print("Password: ");
-        Scanner scanner = new Scanner(System.in);
-        String s = scanner.nextLine();
+    // ------- MENUS
+    public void main_menu() {
+        String login_code = login(MAX_ATTEMPTS);
 
-        if(s.equals("0")) {
-            attempt--;
-            System.out.println("Password incorrect");
-            clearScreen();
-            return login(attempt);
+        if(login_code == null)
+            logout("You have entered your data incorrectly many times.\n" +
+                    "Please, contact the administrator of the system to recover your access data!");
+        else {
+            next_menu(login_code);
+            System.out.println("You logged in successfully!");
         }
 
-        return true;
+    }
+
+    private void student_menu(String login_code) {
+        Scanner scanner = new Scanner(System.in);
+        header("Student Menu");
+        System.out.println("Select one of the options!" +
+                "1 - ");
+    }
+
+    private void professor_menu(String login_code) {
+    }
+
+    private void administrator_menu(String login_code) {
+    }
+
+    public void next_menu(String login_code) {
+        String category = login_code.substring(0,2).toUpperCase();
+
+        System.out.println(category);
+        student_menu(category);
+
+        if (category == Category.ST.toString()) {
+            System.out.println("ddd");
+            student_menu(login_code);
+        } else if (category == Category.PR.toString()) {
+            professor_menu(login_code);
+        } else if (category == Category.AD.toString()) {
+            administrator_menu(login_code);
+        }
+    }
+
+
+
+
+
+
+    public String login(int attempt){
+        if(attempt == 0)
+            return null;
+
+        header("Login");
+        System.out.println("Please input your data correctly! "+attempt+" attempts!");
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Login name: ");
+        String login = scanner.nextLine();
+        System.out.print("Password: ");
+        String password = scanner.nextLine();
+
+        if(!authenticate(login, password)) {
+            attempt--;
+            System.out.println("Password or Login incorrect!\n");
+            clearScreen();
+            return login(attempt);
+        } else
+            return login;
+
     }
 
     public void logout(String sms) {
         System.out.println(sms);
         System.exit(0);
+        main_menu();
     }
-
-    public void main() {
-        if(login(3))
-            System.out.println("Success");
-        else {
-
-        }
-
-    }
-
-
-    // Getters and Settters
-
-    /*private void reduce_attempts() {
-        this.attempt--;
-    }*/
 }
