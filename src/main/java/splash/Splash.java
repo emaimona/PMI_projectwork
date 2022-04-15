@@ -3,6 +3,7 @@ package splash;
 import DAL.DAL;
 import Models.Category;
 import Models.Student;
+import Models.User;
 
 import java.util.Scanner;
 
@@ -99,7 +100,9 @@ public class Splash extends DAL {
         System.out.print("Password: ");
         String password = scanner.nextLine();
 
-        if(!authenticate(login, password)) {
+        User user = new User(login, password);
+
+        if(!authenticate(user)) {
             attempt--;
             System.out.println("Password or Login incorrect!\n");
             clearScreen();

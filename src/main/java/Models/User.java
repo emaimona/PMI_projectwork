@@ -14,6 +14,25 @@ public class User {
         this.password = password;
     }
 
+    public User() {
+    }
+
+    public void setLogin_name(String login_name) {
+        this.login_name = login_name;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getLogin_name() {
+        return login_name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
     public String[] getId() {
         String[] code = {this.login_name.substring(0,2), this.login_name.substring(2)};
         return code;

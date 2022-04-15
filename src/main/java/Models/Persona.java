@@ -7,14 +7,22 @@ public class Persona{
     private int age;
     private Sex sex;
     private String phone;
-    private Date registration_date;
-    private String user_category;
+    private String registration_date;
+    //private String user_category;
 
-    public Date getRegistration_date() {
+    public Persona(String name, int age, Sex sex, String phone, String registration_date) {
+        this.name = name;
+        this.age = age;
+        this.sex = sex;
+        this.phone = phone;
+        this.registration_date = registration_date;
+    }
+
+    public String getRegistration_date() {
         return registration_date;
     }
 
-    public void setRegistration_date(Date registration_date) {
+    public void setRegistration_date(String registration_date) {
         this.registration_date = registration_date;
     }
 
