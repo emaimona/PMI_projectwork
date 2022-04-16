@@ -11,6 +11,11 @@ public class Persona{
     private String registration_date;
     //private String user_category;
 
+
+    public Persona() {
+        this.status = Status.PASSIVE;
+    }
+
     public Persona(String name, int age, Sex sex, String phone, String registration_date) {
         this.name = name;
         this.age = age;

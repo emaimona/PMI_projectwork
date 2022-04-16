@@ -64,6 +64,59 @@ public class Splash extends DAL {
                 "\n3 - Consult grades."+
                 "\n4 - Consult schedule."+
                 "\n5 - Report an issue."+
+                "\n6 - Change your password.."+
+                "\n7 - Logout."+
+                "\n8 - Exit.");
+
+        String option = scanner.nextLine();
+        if(option.equals("1")) {
+
+        } else if(option.equals("2")) {
+
+        } else if(option.equals("3")) {
+
+        } else if(option.equals("4")) {
+
+        } else if(option.equals("5")) {
+            System.out.println("Please write down your issue and press 'Enter' to finish.");
+            String message = scanner.nextLine();
+            registerIssue(new Issue(login_code, message, currentDateTime()));
+            systemPause("Issue reported successfully!");
+            student_menu(login_code);
+        } else if(option.equals("6")) {
+            System.out.print("Please input your current password: ");
+            String password = scanner.nextLine();
+            if (authenticate(new User(login_code.toUpperCase(), password))) {
+                System.out.print("Please input your new password: ");
+                password = scanner.nextLine();
+                updatePassword(new User(login_code.toUpperCase(), password));
+                systemPause("Password updated successfuly!!");
+            } else {
+                systemPause("The current password is wrong!");
+            }
+            student_menu(login_code);
+        }
+        else if(option.equals("7")) {
+            logout("You are logged out!");
+        } else if(option.equals("8")) {
+            exit("");
+        } else {
+            systemPause("Wrong option!");
+            student_menu(login_code);
+        }
+
+    }
+
+    private void professor_menu(String login_code) {
+        Scanner scanner = new Scanner(System.in);
+
+        header("Professor Menu");
+        System.out.println("Select one of the options!" +
+                "\n1 - Consult personal data."+
+                "\n2 - Consult attributed subjects."+
+                "\n3 - Consult schedule."+
+                "\n4 - Update Students grade."+
+                "\n5 - Report an issue."+
                 "\n6 - Logout."+
                 "\n7 - Exit.");
 
@@ -81,7 +134,7 @@ public class Splash extends DAL {
             String message = scanner.nextLine();
             registerIssue(new Issue(login_code, message, currentDateTime()));
             systemPause("Issue reported successfully!");
-            student_menu(login_code);
+            professor_menu(login_code);
         }
         else if(option.equals("6")) {
             logout("You are logged out!");
@@ -91,33 +144,30 @@ public class Splash extends DAL {
             systemPause("Wrong option!");
             student_menu(login_code);
         }
-
     }
 
-    private void professor_menu(String login_code) {
-        Scanner scanner = new Scanner(System.in);
-    }
-
-    private void administrator_menu(String login_code) {
+    protected void administrator_menu(String login_code) {
+        AdministratorMenu adm = new AdministratorMenu();
         Scanner scanner = new Scanner(System.in);
 
         header("Administrator Menu");
         System.out.println("Select one of the options!" +
-                "\n1 - Create Student account."+
-                "\n2 - Create Professor account."+
-                "\n3 - Create a Course."+
-                "\n4 - Create a Subject."+
+                "\n1 - Open an account."+
+                "\n2 - Update an account."+
+                "\n3 - Manage a Course."+
+                "\n4 - Manage a Subject."+
                 "\n1 - Consult Consult ."+
                 "\n2 - Consult registered coursees."+
                 "\n3 - Consult grades."+
                 "\n4 - Consult schedule."+
-                "\n5 - Report an issue."+
-                "\n6 - Logout."+
-                "\n7 - Exit.");
+                "\n5 - Read Professsor issues."+
+                "\n6 - Read Students issues."+
+                "\n7 - Logout."+
+                "\n8 - Exit.");
 
         String option = scanner.nextLine();
         if(option.equals("1")) {
-
+            adm.menuOpenAcconuts(login_code);
         } else if(option.equals("2")) {
 
         } else if(option.equals("3")) {
@@ -168,7 +218,7 @@ public class Splash extends DAL {
         System.out.print("Password: ");
         String password = scanner.nextLine();
 
-        User user = new User(login.toUpperCase(), password);
+        User user = new User(login, password);
 
         if(!authenticate(user)) {
             attempt--;

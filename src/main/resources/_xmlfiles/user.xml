@@ -1,28 +1,13 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<Users>
-            
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Users>
     
-    <last_id>6</last_id>
-            
-    
-    <user id="ST1234">
-                        
-        
+    <last_AD_id>2</last_AD_id>
+    <last_ST_id>7</last_ST_id>
+    <last_PR_id>2</last_PR_id>
+
+    <user id="ad">
         <password>0</password>
-                    
-    
     </user>
-            
-    
-    <user id="SO1239">
-                        
-        
-        <password>02</password>
-                    
-    
-    </user>
-    
     <user id="ST">
         <password>0</password>
     </user>
-</Users>
+<user id="ST0007"><password/></user><user id="PR0002"><password/></user><user id="AD0002"><password/></user></Users>
