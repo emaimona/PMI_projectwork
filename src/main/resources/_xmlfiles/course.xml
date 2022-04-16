@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Courses>
+            
+    
+    <last_id>4</last_id>
+        
+    
+    <course id="CPU">
+                
+        <name>CPU</name>
+                
+        <description/>
+                
+        <registration_date>Mon Apr 18 23:26:17 CEST 2022</registration_date>
+                
+        <subjects>
+                        
+            <subject>KIM</subject>
+                    
+        </subjects>
+                
+        <students>
+                        
+            <student>ST</student>
+                        
+            <student>ST0007</student>
+                        
+            <student>ST0008</student>
+                    
+        </students>
+            
+    </course>
+        
+    <course id="FORA">
+                
+        <name>FORA</name>
+                
+        <description/>
+                
+        <registration_date>Mon Apr 18 23:26:38 CEST 2022</registration_date>
+                
+        <subjects>
+            <subject>MATH</subject>
+        </subjects>
+                
+        <students>
+                        
+            <student>ST</student>
+                        
+            <student>ST0007</student>
+                    
+        </students>
+            
+    </course>
+    
+<course id="CA"><name>Carna</name><description>wedkjhbewkjbkejweskje</description><registration_date>Tue Apr 19 11:33:46 CEST 2022</registration_date><subjects/><students><student>ST</student></students></course></Courses>

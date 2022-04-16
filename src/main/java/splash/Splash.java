@@ -1,16 +1,13 @@
 package splash;
 
 import DAL.DAL;
-import Models.Category;
-import Models.Issue;
-import Models.Student;
-import Models.User;
+import Models.*;
 
 import java.util.Date;
 import java.util.Scanner;
 
 public class Splash extends DAL {
-    private final int MAX_ATTEMPTS = 1;
+    private final int MAX_ATTEMPTS = 3;
 
     public Splash() {
 
@@ -54,38 +51,32 @@ public class Splash extends DAL {
 
     }
 
-    private void student_menu(String login_code) {
+    protected void student_menu(String login_code) {
+        StudentMenu std = new StudentMenu();
         Scanner scanner = new Scanner(System.in);
 
         header("Student Menu");
         System.out.println("Select one of the options!" +
                 "\n1 - Consult personal data."+
                 "\n2 - Consult registered coursees."+
-                "\n3 - Consult grades."+
-                "\n4 - Consult schedule."+
-                "\n5 - Report an issue."+
-                "\n6 - Logout."+
-                "\n7 - Exit.");
+                "\n3 - Report an issue."+
+                "\n4 - Change your password."+
+                "\n5 - Logout."+
+                "\n6 - Exit.");
 
         String option = scanner.nextLine();
         if(option.equals("1")) {
-
+            std.personalData(login_code);
         } else if(option.equals("2")) {
-
+            std.registeredCourses(login_code);
         } else if(option.equals("3")) {
-
+            std.writeIssue(login_code);
         } else if(option.equals("4")) {
-
-        } else if(option.equals("5")) {
-            System.out.println("Please write down your issue and press 'Enter' to finish.");
-            String message = scanner.nextLine();
-            registerIssue(new Issue(login_code, message, currentDateTime()));
-            systemPause("Issue reported successfully!");
-            student_menu(login_code);
+            std.changePassword(login_code);
         }
-        else if(option.equals("6")) {
+        else if(option.equals("5")) {
             logout("You are logged out!");
-        } else if(option.equals("7")) {
+        } else if(option.equals("6")) {
             exit("");
         } else {
             systemPause("Wrong option!");
@@ -94,46 +85,87 @@ public class Splash extends DAL {
 
     }
 
-    private void professor_menu(String login_code) {
+    protected void professor_menu(String login_code) {
+        ProfessorMenu pfm = new ProfessorMenu();
         Scanner scanner = new Scanner(System.in);
+
+        header("Professor Menu");
+        System.out.println("Select one of the options!" +
+                "\n1 - Consult personal data."+
+                "\n2 - Consult attributed subjects."+
+                "\n3 - Report an issue."+
+                "\n4 - Change your password."+
+                "\n5 - Logout."+
+                "\n6 - Exit.");
+
+        String option = scanner.nextLine();
+        if(option.equals("1")) {
+            pfm.personalData(login_code);
+        } else if(option.equals("2")) {
+            pfm.teachingSubject(login_code);
+        } else if(option.equals("3")) {
+            pfm.writeIssue(login_code);
+        } else if(option.equals("4")) {
+            pfm.changePassword(login_code);
+        }
+        else if(option.equals("5")) {
+            logout("You are logged out!");
+        } else if(option.equals("6")) {
+            exit("");
+        } else {
+            systemPause("Wrong option!");
+            student_menu(login_code);
+        }
     }
 
-    private void administrator_menu(String login_code) {
+    protected void administrator_menu(String login_code) {
+        AdministratorMenu adm = new AdministratorMenu();
         Scanner scanner = new Scanner(System.in);
 
         header("Administrator Menu");
         System.out.println("Select one of the options!" +
-                "\n1 - Create Student account."+
-                "\n2 - Create Professor account."+
-                "\n3 - Create a Course."+
-                "\n4 - Create a Subject."+
-                "\n1 - Consult Consult ."+
-                "\n2 - Consult registered coursees."+
-                "\n3 - Consult grades."+
-                "\n4 - Consult schedule."+
-                "\n5 - Report an issue."+
-                "\n6 - Logout."+
-                "\n7 - Exit.");
+                "\n1 - Open an account."+
+                "\n2 - Update an account."+
+                "\n3 - Manage a Course."+
+                "\n4 - Manage a Subject."+
+                "\n5 - Consult accounts."+
+                "\n6 - Consult courses."+
+                "\n7 - Consult subjects."+
+                "\n8 - Read Professsor issues."+
+                "\n9 - Read Students issues."+
+                "\n10 - Logout."+
+                "\n11 - Exit.");
 
         String option = scanner.nextLine();
         if(option.equals("1")) {
-
+            adm.menuOpenAcconuts(login_code);
         } else if(option.equals("2")) {
-
+            adm.menuUpdateAccounts(login_code);
         } else if(option.equals("3")) {
-
+            adm.manageCourses(login_code);
         } else if(option.equals("4")) {
-
+            adm.manageSubjects(login_code);
         } else if(option.equals("5")) {
-
-        }
-        else if(option.equals("6")) {
-            logout("You are logged out!");
+            adm.consultAccounts(login_code);
+        } else if(option.equals("6")) {
+            adm.consultCourses(login_code);
         } else if(option.equals("7")) {
+            adm.consulSubjects(login_code);
+        } else if(option.equals("8")) {
+            adm.printAllIssues(Category.PR.name());
+            systemPause();
+            administrator_menu(login_code);
+        } else if(option.equals("9")) {
+            adm.printAllIssues(Category.ST.name());
+            systemPause();
+            administrator_menu(login_code);
+        } else if(option.equals("10")) {
+            logout("You are logged out!");
+        } else if(option.equals("11")) {
             exit("");
         } else {
             systemPause("Wrong option!");
-            student_menu(login_code);
+            administrator_menu(login_code);
         }
     }
 
@@ -152,7 +184,112 @@ public class Splash extends DAL {
 
 
 
+    // ======> Prints
+    public void printPersona(Persona persona_class){
+        String category = getCategory(Category.valueOf(persona_class.getId().substring(0,2).toUpperCase()));
 
+        String[] class_attr = {"Login name: ", "Category: ", "Name: ", "Age: ", "Sex: ", "Phone: ", "Status: ", "Registration_date: "};
+        String[] values = {persona_class.getId(), category, persona_class.getName(), persona_class.getAge(),
+                persona_class.getSex().toString(), persona_class.getPhone(), persona_class.getStatus().name(),
+                persona_class.getRegistration_date()};
+
+        for (int i=0; i<class_attr.length; i++) {
+            System.out.println(class_attr[i].concat(values[i]));
+        }
+    }
+
+    public void printIssues(Issue issue){
+        String[] class_attr = {"Writer id: ", "Date: ", "Message:\n"};
+        String[] values = {issue.getLogin_name(), issue.getDate(), issue.getMessage()};
+
+        for (int i=0; i<class_attr.length; i++) {
+            System.out.println(class_attr[i].concat(values[i]));
+        }
+    }
+
+
+
+    public void printSubject(Subject subject){
+        String[] class_attr = {"Subject id: ", "Subject name: ", "Professor code: ", "Description:\n", "Registration date: "};
+        String[] values = {subject.getId(), subject.getName(), subject.getProfessor_code(), subject.getDescription(), subject.getRegistration_date()};
+
+        for (int i=0; i<class_attr.length; i++) {
+            System.out.println(class_attr[i].concat(values[i]));
+        }
+    }
+
+    public void printProfessorSubject(Subject subject){
+        String[] class_attr = {"Subject id: ", "Subject name: ", "Description:\n", "Registration date: "};
+        String[] values = {subject.getId(), subject.getName(),subject.getDescription(), subject.getRegistration_date()};
+
+        for (int i=0; i<class_attr.length; i++) {
+            System.out.println(class_attr[i].concat(values[i]));
+        }
+    }
+
+
+    public void printStudentCourse(Course course){
+
+        String[] class_attr = {"Course id: ", "Course name: ", "Description:\n", "Registration date: "};
+        String[] values = {course.getId(), course.getName(),course.getDescription(), course.getRegistration_date()};
+
+        for (int i=0; i<class_attr.length; i++) {
+            System.out.println(class_attr[i].concat(values[i]));
+        }
+        //print subjects
+        System.out.println("Registered subjects: ");
+        if (course.getsubjects() != null) {
+            for (int i = 0; i < course.getsubjects().size(); i++) {
+                Subject s = getSubject(course.getsubjects().get(i));
+                System.out.println("[@id, @name, @Professor] - " + s.getId() +", " + s.getName()+ ", " +s.getProfessor_code());
+            }
+        }
+
+    }
+
+
+    public void printCourse(Course course){
+
+        String[] class_attr = {"Course id: ", "Course name: ", "Description:\n", "Registration date: "};
+        String[] values = {course.getId(), course.getName(),course.getDescription(), course.getRegistration_date()};
+
+        for (int i=0; i<class_attr.length; i++) {
+            System.out.println(class_attr[i].concat(values[i]));
+        }
+
+        //print students
+        System.out.println("Registered students: ");
+        if (course.getstudents() != null) {
+            for (int i=0; i<course.getstudents().size(); i++) {
+                System.out.println(i+1 +" - " + course.getstudents().get(i));
+            }
+        }
+        System.out.println();
+
+
+        //print subjects
+        System.out.println("Registered subjects: ");
+        if (course.getsubjects() != null) {
+            for (int i = 0; i < course.getsubjects().size(); i++) {
+                Subject s = getSubject(course.getsubjects().get(i));
+                System.out.println("[@id, @name, @Professor] - " + s.getId() +", " + s.getName()+ ", " +s.getProfessor_code());
+            }
+        }
+
+    }
+
+    public String getCategory(Category category) {
+        String cat = "";
+
+        if (category.equals(Category.ST)) {
+            cat = "Student";
+        } else if (category.equals(Category.PR)) {
+            cat = "Professor";
+        } else if (category.equals(Category.AD)) {
+            cat = "Administration";
+        }
+        return cat;
+    }
 
     public String login(int attempt){
         if(attempt == 0)
@@ -164,11 +301,11 @@ public class Splash extends DAL {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Login name: ");
-        String login = scanner.nextLine();
+        String login = scanner.nextLine().toUpperCase();
         System.out.print("Password: ");
         String password = scanner.nextLine();
 
-        User user = new User(login.toUpperCase(), password);
+        User user = new User(login, password);
 
         if(!authenticate(user)) {
             attempt--;

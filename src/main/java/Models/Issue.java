@@ -6,9 +6,12 @@ public class Issue {
     private String date;
 
     public Issue(String login_name, String message, String date) {
-        this.login_name = login_name;
+        this.login_name = login_name.toUpperCase();
         this.message = message;
         this.date = date;
+    }
+
+    public Issue() {
     }
 
     public String getLogin_name() {

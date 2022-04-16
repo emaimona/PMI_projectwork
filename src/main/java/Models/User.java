@@ -10,7 +10,7 @@ public class User {
     * */
 
     public User(String login_name, String password) {
-        this.login_name = login_name;
+        this.login_name = login_name.toUpperCase();
         this.password = password;
     }
 
@@ -18,7 +18,7 @@ public class User {
     }
 
     public void setLogin_name(String login_name) {
-        this.login_name = login_name;
+        this.login_name = login_name.toUpperCase();
     }
 
     public void setPassword(String password) {
