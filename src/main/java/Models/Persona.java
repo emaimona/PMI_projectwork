@@ -7,6 +7,7 @@ public class Persona{
     private int age;
     private Sex sex;
     private String phone;
+    private Status status;
     private String registration_date;
     //private String user_category;
 
@@ -15,9 +16,17 @@ public class Persona{
         this.age = age;
         this.sex = sex;
         this.phone = phone;
+        this.status = Status.PASSIVE;
         this.registration_date = registration_date;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
     public String getRegistration_date() {
         return registration_date;
     }
