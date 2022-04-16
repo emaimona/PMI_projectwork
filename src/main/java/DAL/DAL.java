@@ -1,5 +1,6 @@
 package DAL;
 
+import Models.Issue;
 import Models.Persona;
 import Models.User;
 import org.w3c.dom.*;
@@ -8,11 +9,11 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import java.io.File;
-import java.io.FileOutputStream;
+import java.io.*;
 
 public class DAL{
     public final int LOGIN_SIZE = 2;
@@ -21,41 +22,31 @@ public class DAL{
     public final String user_xml = path.concat("user.xml");
     public final String student_xml = path.concat("student.xml");
     public final String persona_xml = path.concat("persona.xml");
+    public final String issue_xml = path.concat("issue.xml");
 
 
-    public void incrementLastId(String path) {
+    public int incrementLastId(Document document) {
+        int val = -1;
         try {
-            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-            DocumentBuilder db = dbf.newDocumentBuilder();
-            Document document = db.parse(path);
-
             Element id = (Element) document.getElementsByTagName("last_id").item(0);
-            int val = Integer.parseInt(id.getTextContent());
-            val++;
+            val = Integer.parseInt(id.getTextContent()) + 1;
             id.setTextContent(val+"");
-
-            TransformerFactory tf = TransformerFactory.newInstance();
-            Transformer t = tf.newTransformer();
-            //t.setOutputProperty(OutputKeys.INDENT, "yes");
-
-            DOMSource dom = new DOMSource(document);
-            StreamResult streamResult = new StreamResult(new File(path));
-            t.transform(dom, streamResult);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return val;
     }
+
 
     public int getLastId(String path) {
         int id = 0;
         try {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
-            Document documnet = db.parse(path);
+            Document document = db.parse(path);
+            document.getDocumentElement().normalize();
 
-            Element size = (Element) documnet.getElementsByTagName("last_id").item(0);
-
+            Element size = (Element) document.getElementsByTagName("last_id").item(0);
             id = Integer.parseInt(size.getTextContent());
 
         } catch (Exception e) {
@@ -64,11 +55,44 @@ public class DAL{
         return id;
     }
 
+    private void update(Document document, String path, String ident) {
+
+    }
+
+    public void registerIssue(Issue issue_class) {
+        try {
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            Document document = db.parse(issue_xml);
+            document.getDocumentElement().normalize();
+
+            int id = incrementLastId(document);
+            Element root = (Element) document.getElementsByTagName("Issues").item(0);
+
+            Element issue = document.createElement("issue");
+            issue.setAttribute("id", id+"");
+            root.appendChild(issue);
+
+            String[] class_atrr = {"login_name", "message", "date"};
+            String[] values = {issue_class.getLogin_name(), issue_class.getMessage(), issue_class.getDate()};
+            appendChilds(document, issue, class_atrr, values);
+            transform(document,issue_xml, "yes");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
     public void registerPersona(Persona persona_class, String login_name) {
         try {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
             Document document = db.parse(persona_xml);
+            document.getDocumentElement().normalize();
+
+            document.normalize();
 
             Element root = (Element) document.getElementsByTagName("Persona").item(0);
             Element persona = document.createElement("persona");
@@ -80,25 +104,30 @@ public class DAL{
                     persona_class.getSex().toString(), persona_class.getPhone(),
                     persona_class.getRegistration_date()};
 
-            for(int i = 0; i< class_attr.length; i++) {
-                Element text = document.createElement(class_attr[i]);
-                text.appendChild(document.createTextNode(values[i]));
-                persona.appendChild(text);
-            }
-
-            TransformerFactory tf = TransformerFactory.newInstance();
-            Transformer t = tf.newTransformer();
-            t.setOutputProperty(OutputKeys.INDENT, "yes");
-
-            DOMSource dom = new DOMSource(document);
-            StreamResult streamResult = new StreamResult(new File(persona_xml));
-
-            t.transform(dom, streamResult);
-            return;
+            appendChilds(document, persona, class_attr, values);
+            transform(document, persona_xml,"yes");
 
         } catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    private void appendChilds(Document document, Element element, String[] class_attr, String[] values) {
+        for(int i = 0; i< class_attr.length; i++) {
+            Element text = document.createElement(class_attr[i]);
+            text.appendChild(document.createTextNode(values[i]));
+            element.appendChild(text);
+        }
+    }
+
+    private void transform(Document document, String path, String ident) throws TransformerException {
+        TransformerFactory tf = TransformerFactory.newInstance();
+        Transformer t = tf.newTransformer();
+        t.setOutputProperty(OutputKeys.INDENT, ident);
+
+        DOMSource dom = new DOMSource(document);
+        StreamResult streamResult = new StreamResult(new File(path));
+        t.transform(dom, streamResult);
     }
 
     public void registerUser(User user_class) {
@@ -107,6 +136,7 @@ public class DAL{
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
             Document document = db.parse(user_xml);
+            document.getDocumentElement().normalize();
 
             Element root = (Element) document.getElementsByTagName("Users").item(0);
 
@@ -136,52 +166,12 @@ public class DAL{
         }
     }
 
-    public void record (String value){
-        try {
-            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-            DocumentBuilder db = dbf.newDocumentBuilder();
-            Document document = db.parse(user_xml);
-
-            //Document dc = db.parse(user_xml);
-
-            Element r = (Element) document.getElementsByTagName("Users").item(0);
-
-            //Element root = document.createElement("Users");
-            //document.appendChild(root);
-
-            Element user = document.createElement("user");
-            r.appendChild(user);
-
-            Attr attr = document.createAttribute("id");
-            long i = System.currentTimeMillis();
-            attr.setValue("_"+i);
-            user.setAttributeNode(attr);
-
-            Element text = document.createElement("Text");
-            text.appendChild(document.createTextNode(value));
-            user.appendChild(text);
-
-            TransformerFactory tf = TransformerFactory.newInstance();
-            Transformer t = tf.newTransformer();
-            t.setOutputProperty(OutputKeys.INDENT, "yes");
-
-
-            DOMSource dom = new DOMSource(document);
-            StreamResult streamResult = new StreamResult(new FileOutputStream(user_xml));
-
-            t.transform(dom, streamResult);
-            System.out.println("Success");
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     public boolean validateUser(User user) {
         try {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
             Document document = db.parse(user_xml);
+            document.getDocumentElement().normalize();
 
             NodeList list = document.getElementsByTagName("user");
             for(int i=0; i<list.getLength(); i++) {
@@ -202,10 +192,6 @@ public class DAL{
     protected boolean authenticate(User user) {
         /*if(login_name.length() != LOGIN_SIZE || password.length() < MINUMUN_PASSWORD_SIZE)
             return false;*/
-
-        if(validateUser(user))
-            return true;
-
-        return false;
+        return validateUser(user);
     }
 }
