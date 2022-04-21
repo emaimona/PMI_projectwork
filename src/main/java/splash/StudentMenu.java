@@ -48,7 +48,7 @@ public class StudentMenu extends Splash{
             printStudentCourse(course);
             System.out.println("\n");
         }
-        systemPause("");
+        systemPause((list.size() == 0)? "You do not have any registered courses yet..":"");
         student_menu(login_code);
     }
 }

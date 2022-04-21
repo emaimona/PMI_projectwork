@@ -16,6 +16,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class DAL {
     public final int LOGIN_SIZE = 2;
@@ -370,6 +371,8 @@ public class DAL {
                         sub.setTextContent(student_id);
                         students.appendChild(sub);
                         transform(document, course_xml, "no");
+
+                        updateStatusToActive(student_id);
                     }
                 }
 
@@ -379,6 +382,12 @@ public class DAL {
             e.printStackTrace();
         }
 
+    }
+
+    private void updateStatusToActive(String persona_id) {
+        updatePersona(new Persona(persona_id),
+                new ArrayList<>(Arrays.asList("status")),
+                new ArrayList<>(Arrays.asList(Status.ACTIVE.name())));
     }
 
 
@@ -396,7 +405,9 @@ public class DAL {
                         Element sub = document.createElement("subject");
                         sub.setTextContent(subject.getId());
                         subjects.appendChild(sub);
-                        transform(document, course_xml, "yes");
+                        transform(document, course_xml, "no");
+
+                        updateStatusToActive(subject.getProfessor_code());
                     }
                 }
 

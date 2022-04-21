@@ -28,7 +28,7 @@ public class ProfessorMenu extends Splash{
             System.out.print("Please input your new password: ");
             password = scanner.nextLine();
             updatePassword(new User(login_code.toUpperCase(), password));
-            systemPause("Password updated successfuly!!");
+            systemPause("Password updated successfully!!");
         } else {
             systemPause("The current password is wrong!");
         }
@@ -49,7 +49,7 @@ public class ProfessorMenu extends Splash{
             printProfessorSubject(subject);
             System.out.println();
         }
-        systemPause("");
+        systemPause((list.size() == 0)? "You do not have any subject attributed yet.":"");
         professor_menu(login_code);
     }
 }

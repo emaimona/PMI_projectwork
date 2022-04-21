@@ -44,6 +44,21 @@ public class AdministratorMenu extends Splash{
         }
     }
 
+    public void printResumeOFTheSystem(String login_code) {
+        header("System Resume");
+
+        System.out.println("Courses: " + getLastId(course_xml));
+        System.out.println("Subjects: " + getLastId(subject_xml));
+        System.out.println("Administrators: " + getLastId(user_xml, Category.AD.name()));
+        System.out.println("Professors: " + getLastId(user_xml, Category.PR.name()));
+        System.out.println("Students: " + getLastId(user_xml, Category.ST.name()));
+        System.out.println("Issues reported: " + getLastId(issue_xml));
+
+        systemPause("");
+        administrator_menu(login_code);
+    }
+
+
     public void consulSubjects(String login_code) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Select one of the options!" +
@@ -217,6 +232,7 @@ public class AdministratorMenu extends Splash{
             systemPause("Subject with this Id does not exists! You need to start over again!");
             manageCourses(login_code);
         }
+        subject = getSubject(subject.getId());
 
         System.out.print("Input the Id of the course: ");
         String course_id = scanner.nextLine().toUpperCase();
@@ -253,7 +269,7 @@ public class AdministratorMenu extends Splash{
         values.add(course.getDescription());
 
         updateCourse(course, class_attbr, values);
-        System.out.println("Course with id '"+ course.getId()+"' updated Sucessfully!");
+        System.out.println("Course with id '"+ course.getId()+"' updated Successfully!");
         systemPause("");
         manageCourses(login_code);
     }
@@ -280,7 +296,7 @@ public class AdministratorMenu extends Splash{
         values.add(course.getName());
 
         updateCourse(course, class_attbr, values);
-        System.out.println("Course with id '"+ course.getId()+"' updated Sucessfully!");
+        System.out.println("Course with id '"+ course.getId()+"' updated Successfully!");
         systemPause("");
         manageCourses(login_code);
     }
@@ -289,13 +305,18 @@ public class AdministratorMenu extends Splash{
         Course course = new Course();
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Please do not input Empty data on the fields!\nMake sure to  inpunt the correct data type!");
+        System.out.println("Please do not input Empty data on the fields!\nMake sure to  input the correct data type!");
 
         System.out.print("Name of the course: ");
         course.setName(scanner.nextLine());
 
         System.out.print("Id of the course: ");
         course.setId(scanner.nextLine().toUpperCase());
+
+        if(course.getId().equals("")) {
+            systemPause("Course Id can not be empty! You need to start over again!");
+            menuCreateCourse(login_code);
+        }
         if(objectExists(course_xml, "course", course.getId())) {
             systemPause("Course with this Id already exists! You need to start over again!");
             menuCreateCourse(login_code);
@@ -306,7 +327,7 @@ public class AdministratorMenu extends Splash{
         
         course.setRegistration_date(currentDateTime());
         createCourse(course);
-        System.out.println("Course with id '"+ course.getId()+"' Created Sucessfully!");
+        System.out.println("Course with id '"+ course.getId()+"' Created Successfully!");
         systemPause("");
         manageCourses(login_code);
     }
@@ -338,7 +359,7 @@ public class AdministratorMenu extends Splash{
     public void menuDeleteSubject(String login_code) {
         Subject subject = new Subject();
         Scanner scanner = new Scanner(System.in);
-        System.out.println("NOTICE: By deliting a subject, you are also deliting it from all courses!" +
+        System.out.println("NOTICE: By deliting a subject, you are also deleting it from all courses!" +
                 "\n Be conscious on that, Recordes should never be deleted!");
         System.out.print("Input the Id of the subject or press 'Enter' to skip: ");
         subject.setId(scanner.nextLine().toUpperCase());
@@ -349,7 +370,7 @@ public class AdministratorMenu extends Splash{
 
         deleteAllSubjectEntryFromCourse(subject);
         deleteSubject(subject);
-        System.out.println("Subject with id '"+ subject.getId()+"' Deleted Sucessfully!");
+        System.out.println("Subject with id '"+ subject.getId()+"' Deleted Successfully!");
         systemPause("");
         manageSubjects(login_code);
 
@@ -377,7 +398,7 @@ public class AdministratorMenu extends Splash{
                 "\n4 - Close");
 
         String option = scanner.nextLine();
-        System.out.println("Please do not input Empty data on the fields!\nMake sure to  inpunt the correct data type!");
+        System.out.println("Please do not input Empty data on the fields!\nMake sure to  input the correct data type!");
         if(option.equals("1")) {
             System.out.print("Name of the subject: ");
             subject.setName(scanner.nextLine());
@@ -406,7 +427,7 @@ public class AdministratorMenu extends Splash{
         }
         subject.setRegistration_date(currentDateTime());
         updateSubject(subject, class_attbr, values);
-        System.out.println("Subject with id '"+ subject.getId()+"' updated Sucessfully!");
+        System.out.println("Subject with id '"+ subject.getId()+"' updated Successfully!");
         systemPause("");
         manageSubjects(login_code);
     }
@@ -415,7 +436,7 @@ public class AdministratorMenu extends Splash{
         Subject subject = new Subject();
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Please do not input Empty data on the fields!\nMake sure to  inpunt the correct data type!");
+        System.out.println("Please do not input Empty data on the fields!\nMake sure to  input the correct data type!");
 
         System.out.print("Name of the subject: ");
         subject.setName(scanner.nextLine());
@@ -439,7 +460,7 @@ public class AdministratorMenu extends Splash{
         }
         subject.setRegistration_date(currentDateTime());
         registerSubject(subject);
-        System.out.println("Subject with id '"+ subject.getId()+"' Created Sucessfully!");
+        System.out.println("Subject with id '"+ subject.getId()+"' Created Successfully!");
         systemPause("");
         manageSubjects(login_code);
     }
@@ -468,7 +489,7 @@ public class AdministratorMenu extends Splash{
                 "\n7 - Close");
 
         String option = scanner.nextLine();
-        System.out.println("Please do not input Empty data on the fields!\nMake sure to  inpunt the correct data type!");
+        System.out.println("Please do not input Empty data on the fields!\nMake sure to  input the correct data type!");
         if(option.equals("1")) {
             System.out.print("Name of the user: ");
             persona.setName(scanner.nextLine());
@@ -531,7 +552,7 @@ public class AdministratorMenu extends Splash{
         }
 
         updatePersona(persona, class_attbr, values);
-        System.out.println("User with id '"+ persona.getId()+"' updated Sucessfully!");
+        System.out.println("User with id '"+ persona.getId()+"' updated Successfully!");
         systemPause("");
         administrator_menu(login_code);
     }
@@ -562,7 +583,7 @@ public class AdministratorMenu extends Splash{
     public void openStudentAccount(String login_code) {
         Scanner scanner = new Scanner(System.in);
         Persona persona = new Persona();
-        System.out.println("Please do not input Empty data on the fields!\nMake sure to  inpunt the correct data type!");
+        System.out.println("Please do not input Empty data on the fields!\nMake sure to  input the correct data type!");
 
         System.out.print("Full name: ");
         persona.setName(scanner.nextLine());
@@ -589,7 +610,7 @@ public class AdministratorMenu extends Splash{
 
         String login_name = registerUser(new User(Category.ST.name(), ""));
         registerPersona(persona, login_name);
-        System.out.println("User account Created Sucessfully!");
+        System.out.println("User account Created Successfully!");
         System.out.println("The User is advised to change the password immediately!");
         System.out.println("The login name is "+login_name+" and the password is by default the empty string (just press 'Enter')!\n");
         menuOpenAcconuts(login_code);
@@ -598,7 +619,7 @@ public class AdministratorMenu extends Splash{
     public void openProfessorAccount(String login_code) {
         Scanner scanner = new Scanner(System.in);
         Persona persona = new Persona();
-        System.out.println("Please do not input Empty data on the fields!\nMake sure to  inpunt the correct data type!");
+        System.out.println("Please do not input Empty data on the fields!\nMake sure to  input the correct data type!");
 
         System.out.print("Full name: ");
         persona.setName(scanner.nextLine());
@@ -635,7 +656,7 @@ public class AdministratorMenu extends Splash{
     public void openAdministrationAccount(String login_code) {
         Scanner scanner = new Scanner(System.in);
         Persona persona = new Persona();
-        System.out.println("Please do not input Empty data on the fields!\nMake sure to  inpunt the correct data type!");
+        System.out.println("Please do not input Empty data on the fields!\nMake sure to  input the correct data type!");
 
         System.out.print("Full name: ");
         persona.setName(scanner.nextLine());
@@ -662,7 +683,7 @@ public class AdministratorMenu extends Splash{
 
         String login_name = registerUser(new User(Category.AD.name(), ""));
         registerPersona(persona, login_name);
-        System.out.println("User account Created Sucessfully!");
+        System.out.println("User account Created Successfully!");
         System.out.println("The User is advised to change the password immediately!");
         System.out.println("The login name is "+login_name+" and the password is by default the empty string (just press 'Enter')!\n");
         menuOpenAcconuts(login_code);

@@ -32,7 +32,7 @@ public class Splash extends DAL {
     }
 
     public void header(String area){
-        System.out.println("\t\t\t*** SCHOOL MANAGMENT SYSTEM ***\n");
+        System.out.println("\t\t\t*** SCHOOL MANAGEMENT SYSTEM ***\n");
         System.out.println("===> "+ area + "\n");
     }
 
@@ -58,7 +58,7 @@ public class Splash extends DAL {
         header("Student Menu");
         System.out.println("Select one of the options!" +
                 "\n1 - Consult personal data."+
-                "\n2 - Consult registered coursees."+
+                "\n2 - Consult registered courses."+
                 "\n3 - Report an issue."+
                 "\n4 - Change your password."+
                 "\n5 - Logout."+
@@ -131,10 +131,11 @@ public class Splash extends DAL {
                 "\n5 - Consult accounts."+
                 "\n6 - Consult courses."+
                 "\n7 - Consult subjects."+
-                "\n8 - Read Professsor issues."+
+                "\n8 - Read Professor issues."+
                 "\n9 - Read Students issues."+
-                "\n10 - Logout."+
-                "\n11 - Exit.");
+                "\n10 - Resume of the System."+
+                "\n11 - Logout."+
+                "\n12 - Exit.");
 
         String option = scanner.nextLine();
         if(option.equals("1")) {
@@ -160,8 +161,10 @@ public class Splash extends DAL {
             systemPause();
             administrator_menu(login_code);
         } else if(option.equals("10")) {
-            logout("You are logged out!");
+            adm.printResumeOFTheSystem(login_code);
         } else if(option.equals("11")) {
+            logout("You are logged out!");
+        } else if(option.equals("12")) {
             exit("");
         } else {
             systemPause("Wrong option!");
@@ -210,7 +213,7 @@ public class Splash extends DAL {
 
 
     public void printSubject(Subject subject){
-        String[] class_attr = {"Subject id: ", "Subject name: ", "Professor code: ", "Description:\n", "Registration date: "};
+        String[] class_attr = {"Subject id: ", "Subject name: ", "Professor code: ", "Description: ", "Registration date: "};
         String[] values = {subject.getId(), subject.getName(), subject.getProfessor_code(), subject.getDescription(), subject.getRegistration_date()};
 
         for (int i=0; i<class_attr.length; i++) {
@@ -219,7 +222,7 @@ public class Splash extends DAL {
     }
 
     public void printProfessorSubject(Subject subject){
-        String[] class_attr = {"Subject id: ", "Subject name: ", "Description:\n", "Registration date: "};
+        String[] class_attr = {"Subject id: ", "Subject name: ", "Description: ", "Registration date: "};
         String[] values = {subject.getId(), subject.getName(),subject.getDescription(), subject.getRegistration_date()};
 
         for (int i=0; i<class_attr.length; i++) {
@@ -230,7 +233,7 @@ public class Splash extends DAL {
 
     public void printStudentCourse(Course course){
 
-        String[] class_attr = {"Course id: ", "Course name: ", "Description:\n", "Registration date: "};
+        String[] class_attr = {"Course id: ", "Course name: ", "Description: ", "Registration date: "};
         String[] values = {course.getId(), course.getName(),course.getDescription(), course.getRegistration_date()};
 
         for (int i=0; i<class_attr.length; i++) {
@@ -238,19 +241,20 @@ public class Splash extends DAL {
         }
         //print subjects
         System.out.println("Registered subjects: ");
-        if (course.getsubjects() != null) {
+        if (course.getsubjects().size() != 0) {
             for (int i = 0; i < course.getsubjects().size(); i++) {
                 Subject s = getSubject(course.getsubjects().get(i));
                 System.out.println("[@id, @name, @Professor] - " + s.getId() +", " + s.getName()+ ", " +s.getProfessor_code());
             }
-        }
+        } else
+            System.out.println("There is no subject registered yet...");
 
     }
 
 
     public void printCourse(Course course){
 
-        String[] class_attr = {"Course id: ", "Course name: ", "Description:\n", "Registration date: "};
+        String[] class_attr = {"Course id: ", "Course name: ", "Description: ", "Registration date: "};
         String[] values = {course.getId(), course.getName(),course.getDescription(), course.getRegistration_date()};
 
         for (int i=0; i<class_attr.length; i++) {
@@ -259,22 +263,24 @@ public class Splash extends DAL {
 
         //print students
         System.out.println("Registered students: ");
-        if (course.getstudents() != null) {
+        if (course.getstudents().size() != 0) {
             for (int i=0; i<course.getstudents().size(); i++) {
                 System.out.println(i+1 +" - " + course.getstudents().get(i));
             }
-        }
+        } else
+            System.out.print("There is no student registered yet..");
         System.out.println();
 
 
         //print subjects
         System.out.println("Registered subjects: ");
-        if (course.getsubjects() != null) {
+        if (course.getsubjects().size() != 0) {
             for (int i = 0; i < course.getsubjects().size(); i++) {
                 Subject s = getSubject(course.getsubjects().get(i));
                 System.out.println("[@id, @name, @Professor] - " + s.getId() +", " + s.getName()+ ", " +s.getProfessor_code());
             }
-        }
+        } else
+            System.out.println("There is no subject registered yet...");
 
     }
 
@@ -290,6 +296,8 @@ public class Splash extends DAL {
         }
         return cat;
     }
+
+
 
     public String login(int attempt){
         if(attempt == 0)

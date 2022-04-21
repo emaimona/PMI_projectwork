@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><Users>
     
-    <last_AD_id>2</last_AD_id>
-    <last_ST_id>9</last_ST_id>
-    <last_PR_id>3</last_PR_id>
+    <last_AD_id>1</last_AD_id>
+    <last_ST_id>4</last_ST_id>
+    <last_PR_id>5</last_PR_id>
 
     <user id="AD">
-        <password>0</password>
+        <password/>
     </user>
-<user id="ST0007"><password/></user><user id="PR0002"><password/></user><user id="AD0002"><password/></user><user id="ST0008"><password/></user><user id="PR0003"><password/></user><user id="ST"><password/></user></Users>
+<user id="ST0001"><password/></user><user id="PR0001"><password/></user><user id="AD0001"><password>admin</password></user><user id="ST0002"><password/></user><user id="ST0003"><password/></user><user id="PR0002"><password/></user><user id="PR0003"><password/></user><user id="PR0004"><password/></user><user id="PR0005"><password/></user><user id="ST0004"><password/></user></Users>

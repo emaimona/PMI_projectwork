@@ -1,55 +1,72 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><Courses>
-            
-    
-    <last_id>4</last_id>
+    <last_id>5</last_id>
         
     
-    <course id="CPU">
+    <course id="COMPSC">
                 
-        <name>CPU</name>
+        <name>Computer Science</name>
                 
-        <description/>
+        <description>Train the students with tech related stuffs</description>
                 
-        <registration_date>Mon Apr 18 23:26:17 CEST 2022</registration_date>
+        <registration_date>Wed Apr 20 17:57:00 CEST 2022</registration_date>
                 
-        <subjects>
-                        
-            <subject>KIM</subject>
-                    
-        </subjects>
+        <subjects/>
                 
         <students>
                         
-            <student>ST</student>
+            <student>ST0001</student>
                         
-            <student>ST0007</student>
-                        
-            <student>ST0008</student>
+            <student>ST0002</student>
                     
         </students>
             
     </course>
         
-    <course id="FORA">
+    <course id="HANGFOR">
                 
-        <name>FORA</name>
+        <name>Hungarian for Foreigners</name>
                 
-        <description/>
+        <description>Teach hungarian for foreigners</description>
                 
-        <registration_date>Mon Apr 18 23:26:38 CEST 2022</registration_date>
+        <registration_date>Wed Apr 20 17:58:00 CEST 2022</registration_date>
                 
         <subjects>
-            <subject>MATH</subject>
+                        
+            <subject>HUNGA1</subject>
+                    
+            <subject>HUNGA1</subject>
         </subjects>
                 
-        <students>
-                        
-            <student>ST</student>
-                        
-            <student>ST0007</student>
-                    
-        </students>
+        <students/>
+            
+    </course>
+        
+    <course id="BIOTECH">
+                
+        <name>Bio Robotics</name>
+                
+        <description>Teach Bio robotics, computer science and eletronics</description>
+                
+        <registration_date>Wed Apr 20 17:59:17 CEST 2022</registration_date>
+                
+        <subjects/>
+                
+        <students/>
+            
+    </course>
+        
+    <course id="GIMNA">
+                
+        <name>Gimnastics</name>
+                
+        <description>Teach a wide variaty of sports</description>
+                
+        <registration_date>Wed Apr 20 18:00:01 CEST 2022</registration_date>
+                
+        <subjects/>
+                
+        <students/>
             
     </course>
     
-<course id="CA"><name>Carna</name><description>wedkjhbewkjbkejweskje</description><registration_date>Tue Apr 19 11:33:46 CEST 2022</registration_date><subjects/><students><student>ST</student></students></course></Courses>
+<course id="MACHLE"><name>Machine Learning</name><description>Teach machine learning to students</description><registration_date>Thu Apr 21 09:49:16 CEST 2022</registration_date><subjects/><students><student>ST0001</student></students></course></Courses>

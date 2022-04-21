@@ -17,6 +17,11 @@ public class Persona{
         this.status = Status.PASSIVE;
     }
 
+    public Persona(String id) {
+        this.id = id.toUpperCase();
+        this.status = Status.PASSIVE;
+    }
+
     public Persona(String id, String name, String age, Sex sex, String phone, String registration_date) {
         this.id = id.toUpperCase();
         this.name = name;
