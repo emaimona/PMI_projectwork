@@ -120,7 +120,7 @@ Course related information is stored here, that is, the Students id's and the su
 - ### Structure of the XML files:
   The Xml files where stored in a way to enable efficient management of the data, that is why, its Model, has its own xml file, and with it linked with some other xml files through id's.
 
-  - ### For the final user
+- ### For the final user
   Whenever a new user is registered, its default status is Passive. In case of a Professor, the status automatically changes whenever a subject is assigned to him, for Students, conversely, whenever he is registered into a course.
   Every Student, Professor or Admininistrator is a Persona, and a persona is a User
   In some 
