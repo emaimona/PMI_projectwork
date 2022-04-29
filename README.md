@@ -11,8 +11,8 @@ _**This project is intended to serve as the final project of the subject Program
 
 
 
-## The goal to achieve/ Purpose
-The project was built having in mind the pre-stablished requirements that is to create a console application in healthcare, education, economics or any other topic, with CRUD(Create Read Update and Delete) as minimal functionality of application.
+## Goal and  Purpose
+The project was built having in mind the pre-stablished requirements, that is, to create a console application in healthcare, education, economics or any other topic, with CRUD(Create Read Update and Delete) as minimal functionality of application.
 
 In order to give the user the ability to decide, which action they want to examine and how many times, everything is organized into menus.
 
@@ -63,7 +63,7 @@ Once you are logged in as a Professor, the user can:
 
 ![Prodessor Map](./src/main/resources/img/professor.png)
 
-###Administrator Menu
+### Administrator Menu
 Here is where the magic happens, that is the administration of the entire system is done here.
 - Open an account.
 - Update an account.
@@ -84,8 +84,8 @@ Here is where the magic happens, that is the administration of the entire system
 ### Terms
 
 ## Structure
-#Structure of the XML files:
-#Structure of the Functions files:
+# Structure of the XML files:
+# Structure of the Functions files:
 
 
 
