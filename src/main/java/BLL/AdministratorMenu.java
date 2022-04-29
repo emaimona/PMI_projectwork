@@ -1,11 +1,12 @@
-package splash;
+package BLL;
 
 import Models.*;
+import PL.Splash;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class AdministratorMenu extends Splash{
+public class AdministratorMenu extends Splash {
 
 
 

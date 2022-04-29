@@ -1,5 +1,8 @@
-package splash;
+package PL;
 
+import BLL.AdministratorMenu;
+import BLL.ProfessorMenu;
+import BLL.StudentMenu;
 import DAL.DAL;
 import Models.*;
 

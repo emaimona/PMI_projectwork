@@ -1,14 +1,14 @@
-package splash;
+package BLL;
 
-import Models.Issue;
-import Models.Persona;
-import Models.Subject;
-import Models.User;
+import Models.*;
+import PL.Splash;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ProfessorMenu extends Splash{
+public class StudentMenu extends Splash {
+
+
     public void writeIssue(String login_code) {
         Scanner scanner = new Scanner(System.in);
 
@@ -16,7 +16,7 @@ public class ProfessorMenu extends Splash{
         String message = scanner.nextLine();
         registerIssue(new Issue(login_code, message, currentDateTime()));
         systemPause("Issue reported successfully!");
-        professor_menu(login_code);
+        student_menu(login_code);
     }
 
     public void changePassword(String login_code) {
@@ -28,28 +28,28 @@ public class ProfessorMenu extends Splash{
             System.out.print("Please input your new password: ");
             password = scanner.nextLine();
             updatePassword(new User(login_code.toUpperCase(), password));
-            systemPause("Password updated successfully!!");
+            systemPause("Password updated successfuly!!");
         } else {
             systemPause("The current password is wrong!");
         }
-        professor_menu(login_code);
+        student_menu(login_code);
     }
 
     public void personalData(String login_code) {
         Persona persona = getPersona(login_code);
         printPersona(persona);
         systemPause("");
-        professor_menu(login_code);
+        student_menu(login_code);
     }
 
-    public void teachingSubject(String login_code) {
-        ArrayList<String> list = getTeachingSubjects(login_code);
+    public void registeredCourses(String login_code) {
+        ArrayList<String> list = getRegisteredCourses(login_code);
         for(int i=0; i< list.size(); i++) {
-            Subject subject = getSubject(list.get(i));
-            printProfessorSubject(subject);
-            System.out.println();
+            Course course = getCourse(list.get(i));
+            printStudentCourse(course);
+            System.out.println("\n");
         }
-        systemPause((list.size() == 0)? "You do not have any subject attributed yet.":"");
-        professor_menu(login_code);
+        systemPause((list.size() == 0)? "You do not have any registered courses yet..":"");
+        student_menu(login_code);
     }
 }

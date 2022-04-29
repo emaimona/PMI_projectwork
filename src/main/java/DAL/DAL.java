@@ -3,7 +3,7 @@ package DAL;
 import Models.*;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
-import splash.Splash;
+import PL.Splash;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -19,11 +19,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class DAL {
-    public final int LOGIN_SIZE = 2;
-    public final int MINUMUN_PASSWORD_SIZE = 1;
+
     public final String path = "src/main/resources/_xmlfiles/";
     public final String user_xml = path.concat("user.xml");
-    public final String student_xml = path.concat("student.xml");
     public final String persona_xml = path.concat("persona.xml");
     public final String issue_xml = path.concat("issue.xml");
     public final String subject_xml = path.concat("subject.xml");
@@ -95,7 +93,7 @@ public class DAL {
 
             String[] class_atrr = {"login_name", "message", "date"};
             String[] values = {issue_class.getLogin_name(), issue_class.getMessage(), issue_class.getDate()};
-            appendChilds(document, issue, class_atrr, values);
+            appendChildren(document, issue, class_atrr, values);
             transform(document,issue_xml, "no");
 
         } catch (Exception e) {
@@ -268,7 +266,7 @@ public class DAL {
                     persona_class.getSex().toString(), persona_class.getPhone(),
                     persona_class.getRegistration_date(), persona_class.getStatus().name()};
 
-            appendChilds(document, persona, class_attr, values);
+            appendChildren(document, persona, class_attr, values);
             transform(document, persona_xml,"no");
 
         } catch (Exception e){
@@ -284,7 +282,7 @@ public class DAL {
         return document;
     }
 
-    private void appendChilds(Document document, Element element, String[] class_attr, String[] values) {
+    private void appendChildren(Document document, Element element, String[] class_attr, String[] values) {
         for(int i = 0; i< class_attr.length; i++) {
             Element text = document.createElement(class_attr[i]);
             text.appendChild(document.createTextNode(values[i]));
@@ -718,7 +716,7 @@ public class DAL {
 
             String[] class_attbr = {"name", "description", "professor_code", "registration_date"};
             String[] values = {subject.getName(), subject.getDescription(), subject.getProfessor_code(), subject.getRegistration_date()};
-            appendChilds(document, sub, class_attbr, values);
+            appendChildren(document, sub, class_attbr, values);
             transform(document, subject_xml, "no");
 
         } catch(Exception e) {
@@ -739,10 +737,6 @@ public class DAL {
             generated_code = formatID(incrementLastId(document, category));
             user.setAttribute("id", category + generated_code);
             root.appendChild(user);
-
-            /*Element login = document.createElement("login");
-            login.appendChild(document.createTextNode(user_class.getLogin_name()));
-            user.appendChild(login);*/
 
             Element password = document.createElement("password");
             password.appendChild(document.createTextNode(user_class.getPassword()));
@@ -795,22 +789,7 @@ public class DAL {
     }
 
     public boolean userExists(String login_name) {
-        try {
-            Document document = getDocument(user_xml);
-            NodeList list = document.getElementsByTagName("user");
-            for (int i = 0; i < list.getLength(); i++) {
-                if (list.item(i).getNodeType() == Node.ELEMENT_NODE) {
-                    Element element = (Element) list.item(i);
-                    if (element.getAttribute("id").equals(login_name)) {
-                        return true;
-                    }
-                }
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
+        return objectExists(user_xml, "user", login_name);
     }
 
     public boolean objectExists(String path, String object_name, String id) {
@@ -832,9 +811,7 @@ public class DAL {
         return false;
     }
 
-        protected boolean authenticate(User user) {
-        /*if(login_name.length() != LOGIN_SIZE || password.length() < MINUMUN_PASSWORD_SIZE)
-            return false;*/
+    protected boolean authenticate(User user) {
         return validateUser(user);
     }
 
