@@ -33,7 +33,7 @@ Once the application is console only, the user needs to install a java IDE and M
 
 Once it is installed the user needs to clone project and then run the application...
 
-## Structure
+## Functionality
 The application is structured in 3 distinct menus, as follows: Login, Administration, Professor adn Student menu.
 
 ### Login menu
@@ -41,52 +41,60 @@ The first menu that shows up once the application is started. It is where the us
 If the data is input incorrectly 3 times the applications closes automatically. In case the user forgot the credentials he can request it to the administrator of the system.
 
 ### Student menu
-- Once you are logged in as a student, the user can:
-  1 - Consult personal data.
-  2 - Consult registered courses.
-  3 - Report an issue.
-  4 - Change your password.
-  5 - Logout.
-  6 - Exit.
+Once you are logged in as a student, the user can:
+- Consult personal data.
+- Consult registered courses.
+- Report an issue.
+- Change your password.
+- Logout.
+- Exit.
+
 ![Student Map](./src/main/resources/img/student.png)
 
 
 ### Professor Menu
-- Once you are logged in as a Professor, the user can:
-1. - Consult personal data.
-2. - Consult attributed subjects.
-3 - Report an issue.
-4 - Change your password.
-5 - Logout.
-6 - Exit.
+Once you are logged in as a Professor, the user can:
+- Consult personal data.
+- Consult attributed subjects.
+- Report an issue.
+- Change your password.
+- Logout.
+- Exit.
+
 ![Prodessor Map](./src/main/resources/img/professor.png)
 
 ###Administrator Menu
-1 - Open an account.
-2 - Update an account.
-3 - Manage a Course.
-4 - Manage a Subject.
-5 - Consult accounts.
-6 - Consult courses.
-7 - Consult subjects.
-8 - Read Professor issues.
-9 - Read Students issues.
-10 - Resume of the System.
-11 - Logout.
-12 - Exit.
+Here is where the magic happens, that is the administration of the entire system is done here.
+- Open an account.
+- Update an account.
+- Manage a Course.
+- Manage a Subject.
+- Consult accounts.
+- Consult courses.
+- Consult subjects.
+- Read Professor issues.
+- Read Students issues.
+- Resume of the System.
+- Logout.
+- Exit.
+
 ![Administrator Map](./src/main/resources/img/admin.png)
 
 
-Show it works once
 ### Terms
 
-## Conventions:
-Whenever a new user is registered, its default status is Passive. In case of a Professor, the status automatically changes whenever a subject is assigned to him, for Students, conversally, whenever he is registered into a course.
-
+## Structure
 #Structure of the XML files:
 #Structure of the Functions files:
 
 
-12 April, 2022 
-Maimona Emanuel Nzinga
-University of Pécs
+
+## Conventions:
+Whenever a new user is registered, its default status is Passive. In case of a Professor, the status automatically changes whenever a subject is assigned to him, for Students, conversally, whenever he is registered into a course.
+
+
+
+
+> 12 April, 2022 
+> Maimona Emanuel Nzinga
+> University of Pécs
