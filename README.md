@@ -48,7 +48,7 @@ If the data is input incorrectly 3 times the applications closes automatically. 
   4 - Change your password.
   5 - Logout.
   6 - Exit.
-![](./src/main/resources/img/student.png)
+![](../PMI_projectwork/src/main/resources/img/student.png)
 
 
 ###Professor Menu
@@ -59,7 +59,7 @@ If the data is input incorrectly 3 times the applications closes automatically. 
 4 - Change your password.
 5 - Logout.
 6 - Exit.
-![](./src/main/resources/img/professor.png)
+![](../PMI_projectwork/src/main/resources/img/professor.png)
 
 ###Administrator Menu
 1 - Open an account.
