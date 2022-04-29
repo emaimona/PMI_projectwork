@@ -19,7 +19,6 @@ public class Main {
 
         /* DO I NEED A COUNTER FOR ALL OBJECT? */
         Splash window = new Splash();
-
         window.main_menu();
 
 

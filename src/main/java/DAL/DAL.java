@@ -732,14 +732,11 @@ public class DAL {
 
         try {
             Document document = getDocument(user_xml);
-
             Element root = (Element) document.getElementsByTagName("Users").item(0);
-
             Element user = document.createElement("user");
 
             category = user_class.getLogin_name();
             generated_code = formatID(incrementLastId(document, category));
-
             user.setAttribute("id", category + generated_code);
             root.appendChild(user);
 
