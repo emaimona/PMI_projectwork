@@ -388,7 +388,7 @@ public class AdministratorMenu extends Splash{
         subject.setId(scanner.nextLine().toUpperCase());
         if(!objectExists(subject_xml, "subject", subject.getId())) {
             systemPause("Subject with this Id does not exists! You need to start over again!");
-            menuUpdateSubject(login_code);
+            manageSubjects(login_code);
         }
 
         System.out.println("Select one of the options!" +

@@ -7,4 +7,5 @@
     <user id="AD">
         <password/>
     </user>
-<user id="ST0001"><password/></user><user id="PR0001"><password/></user><user id="AD0001"><password>admin</password></user><user id="ST0002"><password/></user><user id="ST0003"><password/></user><user id="PR0002"><password/></user><user id="PR0003"><password/></user><user id="PR0004"><password/></user><user id="PR0005"><password/></user><user id="ST0004"><password/></user></Users>
+<user id="ST0001"><password/></user><user id="PR0001"><password/></user>
+    <user id="AD0001"><password>admin</password></user><user id="ST0002"><password/></user><user id="ST0003"><password/></user><user id="PR0002"><password/></user><user id="PR0003"><password/></user><user id="PR0004"><password/></user><user id="PR0005"><password/></user><user id="ST0004"><password/></user></Users>
