@@ -74,7 +74,7 @@ If the data is input incorrectly 3 times the applications closes automatically. 
 10 - Resume of the System.
 11 - Logout.
 12 - Exit.
-![](./src/main/resources/img/admin.png)
+![](../PMI_projectwork/src/main/resources/img/admin.png)
 
 
 Show it works once
