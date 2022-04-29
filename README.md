@@ -31,7 +31,9 @@ Once the application is console only, the user needs to install a java IDE and M
 [Maven](https://maven.apache.org/download.cgi),
 [Intellij](https://www.jetbrains.com/idea/download/#section=windows)
 
-Once it is installed the user needs to clone project and then run the application...
+Once it is installed the user needs to clone the project and then run the application.
+
+Use the login name 'AD0001' and the password 'admin' to enter into the system and using it according to your wills.
 
 ## Functionality
 The application is structured in 3 distinct menus, as follows: Login, Administration, Professor and Student menu.
@@ -86,16 +88,20 @@ Even thought the project is for console application only, it was built on top of
 
 ## User model
 This is the model/class in which the login name and the password are stored.
->The login name is made by the first two letters which represent the category and 4 numbers, which indicates the registration number. The categories are AD(Administretor), ST(Student) and PR(Professor). For example 'ST0001', represents a student with registration id 0001.
-> 
+ 
+- The login name is made by the first two letters which represent the category and 4 numbers, which indicates the registration number. 
+- The categories meaning are AD(Administrator), ST(Student) and PR(Professor). For example 'ST0001', represents a student with registration id 0001.
+
 ![User model](./src/main/resources/img/user.png)
 
 ## Persona model
 Here is where the personal identification data of the user is stored, as well as its correspondent @id(User id). 
+
 ![Persona model](./src/main/resources/img/persona.png)
 
 ## Issue model
 Every Student or Professor, can write an issue or complaint to be read by the administrator of the system.
+
 ![Issue model](./src/main/resources/img/issue.png)
 
 ## Subject model
@@ -106,27 +112,29 @@ Here is information about the Subject is stored. By convention every subject has
 
 ## Course model
 Course related information is stored here, that is, the Students id's and the subjects correspondent to the course.
- The methods correspond to the Presentation Layer, which is related to the Administrator menu (Look upwards)
+ The methods correspond to the Presentation Layer, which is related to the Administrator menu (Look upwards).
+
 ![Course model](./src/main/resources/img/course.png)
 
-> ### Conventions:
->># Structure of the XML files:
-The Xml files where stored in a way to enable efficient management of the data, that is why, its Model, has its own xml file, and with it linked with some other xml files through id's.
+ # Conventions
+- ### Structure of the XML files:
+  The Xml files where stored in a way to enable efficient management of the data, that is why, its Model, has its own xml file, and with it linked with some other xml files through id's.
 
->> For the final user
-Whenever a new user is registered, its default status is Passive. In case of a Professor, the status automatically changes whenever a subject is assigned to him, for Students, conversely, whenever he is registered into a course.
-Every Student, Professor or Admininistrator is a Persona, and a persona is a User
-In some 
+  - ### For the final user
+  Whenever a new user is registered, its default status is Passive. In case of a Professor, the status automatically changes whenever a subject is assigned to him, for Students, conversely, whenever he is registered into a course.
+  Every Student, Professor or Admininistrator is a Persona, and a persona is a User
+  In some 
 
 
 ### Future Contribuitons
-> Add more information to the Persona, such as email, etc. 
-> Add more information to the subject such as kind(Lecture or Pratice using enums), how many hours per week, etc. 
-> Store students grades, for each subject, in which, the corresponde professor can give a grade to a student taking his subject.
-> Add course schedule generator, based on the number of registered subjects and its correspondent amount of hours per semester.
-> Think, Think, think, and then, implement your own ideias.
-
+- Add more information to the Persona, such as email, etc. 
+- Add more information to the subject such as kind(Lecture or Pratice using enums), how many hours per week, etc. 
+- Store students grades, for each subject, in which, the corresponde professor can give a grade to a student taking his subject.
+- Add course schedule generator, based on the number of registered subjects and its correspondent amount of hours per semester.
+- Think, Think, think, and then, implement your own ideas :smile:
 
 > 12 April, 2022
+> 
 > Maimona Emanuel Nzinga
-> University of Pécs
+> 
+> _University of Pécs_
