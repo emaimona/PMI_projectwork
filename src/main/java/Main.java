@@ -29,6 +29,6 @@ public class Main {
 //s.setId("KIM");
 //t.updateSubject(s, ["e"], {""});
 //t.deleteAllSubjectEntryFromCourse(s);
-//Issue issue = t.getIssues("ST0007");
+//Issue issue = t.getIssue("ST0007");
 //System.out.println(t.getRegisteredCourses("ST").toString());
 //System.out.println(t.getTeachingSubjects("PR0003"));

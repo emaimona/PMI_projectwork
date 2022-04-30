@@ -169,7 +169,7 @@ public class DAL {
     }
 
 
-    public Issue getIssues(String login_name) {
+    public Issue getIssue(String date) {
         Issue issue = null;
         try {
             Document document = getDocument(issue_xml);
@@ -177,10 +177,10 @@ public class DAL {
             NodeList node = document.getElementsByTagName("issue");
             for (int i=0; i< node.getLength(); i++) {
                 Element element = (Element) node.item(i);
-                if(element.getNodeType() == Node.ELEMENT_NODE && element.getElementsByTagName("login_name").item(0).getTextContent().equals(login_name)) {
+                if(element.getNodeType() == Node.ELEMENT_NODE && element.getElementsByTagName("date").item(0).getTextContent().equals(date)) {
                     issue = new Issue();
-                    issue.setLogin_name(login_name);
-                    issue.setDate(element.getElementsByTagName("date").item(0).getTextContent());
+                    issue.setLogin_name(element.getElementsByTagName("login_name").item(0).getTextContent());
+                    issue.setDate(date);
                     issue.setMessage(element.getElementsByTagName("message").item(0).getTextContent());
                 }
 
@@ -549,15 +549,17 @@ public class DAL {
             NodeList node =  document.getElementsByTagName("issue");
             for (int k=0; k<node.getLength(); k++) {
                 Element element = (Element) node.item(k);
-                Issue issue = getIssues(element.getElementsByTagName("login_name").item(0).getTextContent());
-                //System.out.println(issue.getLogin_name());
+
+                // Getting the issues by the date, because it can be uniquely identified this way
+                // Bear in mind a user write many issues
+
+                Issue issue = getIssue(element.getElementsByTagName("date").item(0).getTextContent());
+
                 if (issue != null && issue.getLogin_name().startsWith(category)){
-                        s.printIssues(issue);
+                        s.printIssue(issue);
                         System.out.println();
                         System.out.println();
                 }
-
-
             }
         } catch (Exception e) {
             e.printStackTrace();

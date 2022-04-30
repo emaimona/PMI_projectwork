@@ -13,25 +13,10 @@ public class Splash extends DAL {
     private final int MAX_ATTEMPTS = 3;
 
     public Splash() {
-
     }
 
     public void clearScreen() {
-       /* try {
-            final String os = System.getProperty("os.name");
-            if (os.contains("Windows"))
-                Runtime.getRuntime().exec("cls");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-*//*        try {
-
-            if (System.getProperty("os.name").contains("Windows"))
-                new ProcessBuilder("cmd", "/c",
-                        "cls").inheritIO().start().waitFor();
-            else
-                Runtime.getRuntime().exec("clear");
-        } catch (IOException | InterruptedException ex) {}*/
+      // To be implemented.....
     }
 
     public void header(String area){
@@ -204,7 +189,7 @@ public class Splash extends DAL {
         }
     }
 
-    public void printIssues(Issue issue){
+    public void printIssue(Issue issue){
         String[] class_attr = {"Writer id: ", "Date: ", "Message:\n"};
         String[] values = {issue.getLogin_name(), issue.getDate(), issue.getMessage()};
 
