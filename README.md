@@ -1,6 +1,6 @@
 # PMI_projectwork
 
-_**This project is intended to serve as the final project of the subject Programming Methodolgy I, in which the main programming language used is Java.**_
+_**This project is intended to serve as the final project work of the subject Programming Methodology I, in which the main programming language used is Java.**_
 
 
 
