@@ -25,11 +25,11 @@ The project serves as medium to store data in an easy and quick way. As a manage
 
 ## Use
 ### Prerequisites
-Once the application is console only, the user needs to install a java IDE and MAVEN, to be able to use it. The suggested links to the installations, based on what was used along the development of the project are:
+Once the application is console only, the user needs to install a **java IDE** and **MAVEN**, to be able to use it. The suggested links to the installations, based on what was used along the development of the project are:
 [Git](https://git-scm.com/download/win),
 [JDK](https://www.oracle.com/java/technologies/downloads/),
 [Maven](https://maven.apache.org/download.cgi),
-[Intellij](https://www.jetbrains.com/idea/download/#section=windows)
+[Intellij](https://www.jetbrains.com/idea/download/#section=windows).
 
 Once it is installed the user needs to clone the project and then run the application.
 
@@ -84,7 +84,7 @@ Here is where the magic happens, that is, the administration of the entire syste
 
 
 # Structure
-Even thought the project interface target was console application only, it was built on top of the **3 Layerd Architecture**, that is, there is a **BLL** (Business Logic Layer), **DAL** (Data access Layer) and **PL** (Presentation Layer or splash).
+Even thought the project's interface target was console application only, it was built on top of the **3 Layerd Architecture**, that is, there is a **BLL** (Business Logic Layer), **DAL** (Data access Layer) and **PL** (Presentation Layer or splash).
 
 **Models** can be seen as elements of the Presentation Layer, to depict the main information stored in the xml File.
 
@@ -128,7 +128,7 @@ The methods in the image, correspond to the Presentation Layer, which is related
 ### For the final user
 - The system is made up to be able to stored **9999** users of each category, in total 29997 users can be stored without any inconsistency.
 - Whenever a new user is registered, its default status is **Passive**. In case of a Professor, the status automatically changes whenever a subject is assigned to him, for Students, conversely, whenever he is registered into a course.
-- All User are **advised to change their password** right away, because, for every new account, a default password is attributed to it, that is "" or (empty string), which is not secure, and it compromises the security of the system. 
+- All Users are **advised to change their password** right away, because, for every new account, a default password is attributed to it, that is "" or (empty string), which is not secure, and it compromises the security of the system. 
 -Every Student, Professor or Administrator is a Persona, and every Persona is a User.
 
 
@@ -141,6 +141,8 @@ The methods in the image, correspond to the Presentation Layer, which is related
 - Think, Think, think, and then, implement your own ideas :smile:
 
 
-     12 April, 2022
-     Maimona Emanuel Nzinga
-     University of Pécs
+> 12 April, 2022
+>
+>**Maimona Emanuel Nzinga**
+>
+>_**University of Pécs**_
